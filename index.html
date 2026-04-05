@@ -3,12 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fotoshare Downloader</title>
+    <title>Fotoshare Downloader — Téléchargez vos albums Fotoshare facilement</title>
+    <meta name="description" content="Téléchargez vos albums photos Fotoshare en un clic. Collez l'URL de votre album, prévisualisez les images et téléchargez-les individuellement ou en ZIP.">
+    <meta name="keywords" content="Fotoshare, télécharger album, downloader, photos, téléchargement images, album photo, ZIP">
+    <meta name="robots" content="index, follow">
+    <meta name="author" content="Fotoshare Downloader">
+    <link rel="canonical" href="https://fotoshare-downloader.kmaindron.fr/">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Fotoshare Downloader — Téléchargez vos albums Fotoshare">
+    <meta property="og:description" content="Collez l'URL d'un album Fotoshare pour prévisualiser et télécharger toutes les photos en un clic.">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="fr_FR">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Fotoshare Downloader">
+    <meta name="twitter:description" content="Téléchargez vos albums Fotoshare facilement. Prévisualisation et téléchargement en ZIP.">
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebApplication",
+        "name": "Fotoshare Downloader",
+        "description": "Outil en ligne pour télécharger des albums photos depuis Fotoshare. Prévisualisation et téléchargement en ZIP.",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "All",
+        "inLanguage": "fr",
+        "offers": {
+            "@type": "Offer",
+            "price": "0",
+            "priceCurrency": "EUR"
+        }
+    }
+    </script>
+
     <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFAAAAtIow0qE4yJk1RZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMe5Ss93AAAADJ0Uk5TAP///5L//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w31JF8pAAADI0lEQVR4nO3dQaeVURSA4a7iEomIiEhEk+j//4giEZGIiGgSuZdo/E3Ku5x15fS8sz1Ye539DL/Jubg16+JiOPiXa38djneWtlwP54b7Lpee8fNwvLu05cdwbrgPVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVujezjOurg7H+0tY34dzp/0Z5x2sEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCs0BTrwdI3zG8r156o6ZsfLmF9PRwfLW35Mpwb7rsZrMdLWz4P54b7YIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFniw949Ph+PR6Zcvlx9nczpvPNFghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVihKdazpS+lH1auPVHTNz9fwnq/cu2J+rexXixteTecG+67IazbO1veDueG+2CFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVeLmG9ORzPBOvWq+ngH3t9PJ7Jv6P8l/0GoYISSy/aTnEAAAAASUVORK5CYII=">
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); border: 0; }
         body {
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
             background: #0f0f0f;
@@ -361,17 +397,19 @@
 <body>
 
     <!-- ===== LANDING PAGE ===== -->
+    <main>
     <div id="landing">
         <div class="logo">
-            <div class="logo-text">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="" />
+            <h1 class="logo-text">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="Fotoshare Downloader logo" />
                 Fotoshare <span>Downloader</span>
-            </div>
+            </h1>
         </div>
 
         <div class="search-bar">
+            <label for="url-input" class="sr-only">URL de l'album Fotoshare</label>
             <input type="text" id="url-input" placeholder="Collez l'URL d'un album Fotoshare..." autofocus>
-            <button id="btn-fetch" onclick="fetchFromUrl()">
+            <button id="btn-fetch" onclick="fetchFromUrl()" aria-label="Analyser l'album">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
             </button>
         </div>
@@ -387,7 +425,7 @@
     <div id="results">
         <div class="top-bar">
             <div class="mini-logo" onclick="goHome()">
-                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="" />
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="Fotoshare Downloader logo" />
                 Fotoshare <span>Downloader</span>
             </div>
             <div class="mini-search">
@@ -453,6 +491,7 @@
             </div>
         </div>
     </div>
+    </main>
 
     <script>
     // State
