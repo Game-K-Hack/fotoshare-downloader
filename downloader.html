@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FotoShare Downloader</title>
+    <title>Fotoshare Downloader</title>
+    <link rel="icon" type="image/x-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFAAAAtIow0qE4yJk1RZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMe5Ss93AAAADJ0Uk5TAP///5L//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w31JF8pAAADI0lEQVR4nO3dQaeVURSA4a7iEomIiEhEk+j//4giEZGIiGgSuZdo/E3Ku5x15fS8sz1Ye539DL/Jubg16+JiOPiXa38djneWtlwP54b7Lpee8fNwvLu05cdwbrgPVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVujezjOurg7H+0tY34dzp/0Z5x2sEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCsEKwQrBCs0BTrwdI3zG8r156o6ZsfLmF9PRwfLW35Mpwb7rsZrMdLWz4P54b7YIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFniw949Ph+PR6Zcvlx9nczpvPNFghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVihKdazpS+lH1auPVHTNz9fwnq/cu2J+rexXixteTecG+67IazbO1veDueG+2CFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVghWCFYIVeLmG9ORzPBOvWq+ngH3t9PJ7Jv6P8l/0GoYISSy/aTnEAAAAASUVORK5CYII=">
     <script src="https://cdn.jsdelivr.net/npm/jszip@3.10.1/dist/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/file-saver@2.0.5/dist/FileSaver.min.js"></script>
     <style>
@@ -13,141 +14,254 @@
             background: #0f0f0f;
             color: #e0e0e0;
             min-height: 100vh;
+            overflow-x: hidden;
         }
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 40px 20px;
-        }
-        h1 {
-            text-align: center;
-            font-size: 1.8em;
-            margin-bottom: 8px;
-            color: #fff;
-        }
-        .subtitle {
-            text-align: center;
-            color: #888;
-            margin-bottom: 30px;
-            font-size: 0.9em;
-        }
-        .input-section {
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            border: 1px solid #2a2a2a;
-        }
-        .input-section h2 {
-            font-size: 1em;
-            margin-bottom: 12px;
-            color: #ccc;
-        }
-        .input-row {
+
+        /* ===== LANDING PAGE (Google-style) ===== */
+        #landing {
             display: flex;
-            gap: 10px;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            transition: opacity 0.4s, transform 0.4s;
         }
-        input[type="text"] {
-            flex: 1;
-            padding: 12px 16px;
-            border-radius: 8px;
-            border: 1px solid #333;
-            background: #111;
+        #landing.hide {
+            opacity: 0;
+            transform: translateY(-30px);
+            pointer-events: none;
+        }
+        .logo {
+            margin-bottom: 40px;
+            text-align: center;
+            user-select: none;
+        }
+        .logo-text {
+            font-size: 3em;
+            font-weight: 500;
             color: #fff;
-            font-size: 0.95em;
-            outline: none;
-            transition: border-color 0.2s;
+            letter-spacing: -1px;
         }
-        input[type="text"]:focus { border-color: #4a9eff; }
-        button {
-            padding: 12px 24px;
-            border-radius: 8px;
+        .logo-text span { font-weight: 300; color: #4a9eff; }
+        .logo-text img { height: 35px; }
+
+        /* Search bar */
+        .search-bar {
+            width: 100%;
+            max-width: 620px;
+            position: relative;
+        }
+        .search-bar input {
+            width: 100%;
+            padding: 18px 56px 18px 24px;
+            border-radius: 28px;
+            border: 1px solid #333;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1.05em;
+            outline: none;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+        .search-bar input:focus {
+            border-color: #4a9eff;
+            box-shadow: 0 0 0 3px rgba(74, 158, 255, 0.12);
+        }
+        .search-bar input::placeholder { color: #555; }
+        .search-bar button {
+            position: absolute;
+            right: 6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
             border: none;
             background: #4a9eff;
             color: #fff;
-            font-weight: 600;
+            font-size: 1.2em;
             cursor: pointer;
-            font-size: 0.95em;
-            transition: background 0.2s, opacity 0.2s;
-            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.2s, transform 0.15s;
+            padding: 0;
         }
-        button:hover { background: #3a8eef; }
-        button:disabled { opacity: 0.4; cursor: not-allowed; }
-        .divider {
+        .search-bar button:hover { background: #3a8eef; transform: translateY(-50%) scale(1.05); }
+        .search-bar button:disabled { opacity: 0.4; cursor: not-allowed; transform: translateY(-50%); }
+        .search-bar .spinner {
+            width: 20px; height: 20px;
+            border: 2.5px solid rgba(255,255,255,0.3);
+            border-top-color: #fff;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .landing-hint {
+            margin-top: 24px;
+            color: #444;
+            font-size: 0.82em;
             text-align: center;
-            color: #555;
-            margin: 16px 0;
-            font-size: 0.85em;
         }
-        .file-input-wrapper {
+        .landing-hint kbd {
+            background: #222;
+            border: 1px solid #333;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: inherit;
+            color: #666;
+        }
+
+        /* Error toast on landing */
+        .landing-error {
+            margin-top: 16px;
+            color: #f87171;
+            font-size: 0.88em;
+            text-align: center;
+            max-width: 500px;
+            min-height: 1.2em;
+        }
+
+        /* ===== RESULTS PAGE ===== */
+        #results {
+            display: none;
+            opacity: 0;
+            transition: opacity 0.4s;
+            padding: 0 20px 40px;
+        }
+        #results.show {
+            display: block;
+            opacity: 1;
+        }
+
+        /* Top bar */
+        .top-bar {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 16px 0;
+            max-width: 900px;
+            margin: 0 auto 20px;
+            border-bottom: 1px solid #1e1e1e;
+        }
+        .top-bar .mini-logo {
+            font-size: 1.2em;
+            font-weight: 500;
+            color: #888;
+            cursor: pointer;
+            white-space: nowrap;
+            flex-shrink: 0;
+            transition: color 0.2s;
+        }
+        .top-bar .mini-logo span { font-weight: 300; color: #4a9eff; }
+        .top-bar .mini-logo img { height: 13px; }
+        .top-bar .mini-logo:hover { color: #ccc; }
+        .top-bar .mini-search {
+            flex: 1;
             position: relative;
         }
-        input[type="file"] {
+        .top-bar .mini-search input {
             width: 100%;
-            padding: 12px;
-            border-radius: 8px;
-            border: 2px dashed #333;
-            background: #111;
-            color: #aaa;
-            cursor: pointer;
-        }
-        input[type="file"]:hover { border-color: #4a9eff; }
-
-        /* Status panel */
-        #status-panel {
-            display: none;
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
+            padding: 10px 44px 10px 16px;
+            border-radius: 20px;
             border: 1px solid #2a2a2a;
-        }
-        .album-title-display {
-            font-size: 1.3em;
-            font-weight: 700;
+            background: #151515;
             color: #fff;
-            margin-bottom: 16px;
-            text-align: center;
+            font-size: 0.9em;
+            outline: none;
+            transition: border-color 0.2s;
         }
+        .top-bar .mini-search input:focus { border-color: #4a9eff; }
+        .top-bar .mini-search button {
+            position: absolute;
+            right: 4px; top: 50%;
+            transform: translateY(-50%);
+            width: 34px; height: 34px;
+            border-radius: 50%;
+            border: none;
+            background: #4a9eff;
+            color: #fff;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            font-size: 1em;
+        }
+        .top-bar .mini-search button:hover { background: #3a8eef; }
+
+        /* Content area */
+        .results-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Album header */
+        .album-header {
+            text-align: center;
+            margin-bottom: 28px;
+        }
+        .album-header h2 {
+            font-size: 1.6em;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .album-header .album-meta {
+            color: #666;
+            font-size: 0.85em;
+        }
+
+        /* Stats row */
         .stats {
             display: flex;
-            gap: 16px;
+            gap: 12px;
             justify-content: center;
-            margin-bottom: 20px;
+            margin-bottom: 24px;
             flex-wrap: wrap;
         }
         .stat-box {
-            background: #222;
-            padding: 12px 20px;
-            border-radius: 8px;
+            background: #161616;
+            padding: 14px 22px;
+            border-radius: 10px;
             text-align: center;
-            min-width: 100px;
+            min-width: 90px;
+            border: 1px solid #1e1e1e;
         }
         .stat-box .number {
-            font-size: 1.5em;
+            font-size: 1.6em;
             font-weight: 700;
             color: #4a9eff;
         }
         .stat-box .label {
-            font-size: 0.75em;
-            color: #888;
-            margin-top: 2px;
+            font-size: 0.72em;
+            color: #666;
+            margin-top: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
+        .stat-box.success .number { color: #4ade80; }
+        .stat-box.error .number { color: #f87171; }
 
         /* Progress */
-        .progress-container {
-            margin-bottom: 16px;
+        .progress-section {
+            background: #161616;
+            border: 1px solid #1e1e1e;
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
         }
         .progress-bar-bg {
-            height: 8px;
+            height: 6px;
             background: #222;
-            border-radius: 4px;
+            border-radius: 3px;
             overflow: hidden;
         }
         .progress-bar-fill {
             height: 100%;
             background: linear-gradient(90deg, #4a9eff, #7b61ff);
-            border-radius: 4px;
+            border-radius: 3px;
             transition: width 0.3s;
             width: 0%;
         }
@@ -155,90 +269,139 @@
             display: flex;
             justify-content: space-between;
             font-size: 0.8em;
-            color: #888;
+            color: #666;
+            margin-top: 8px;
+        }
+
+        /* Action buttons */
+        .actions-row {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 24px;
+        }
+        button {
+            padding: 12px 28px;
+            border-radius: 8px;
+            border: none;
+            background: #4a9eff;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.95em;
+            transition: background 0.2s, opacity 0.2s, transform 0.1s;
+            white-space: nowrap;
+        }
+        button:hover { background: #3a8eef; }
+        button:active { transform: scale(0.97); }
+        button:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+        .btn-download-zip {
+            background: #22c55e;
+            font-size: 1.05em;
+            padding: 14px 36px;
+            border-radius: 10px;
+        }
+        .btn-download-zip:hover { background: #16a34a; }
+        .btn-cancel { background: #dc2626; }
+        .btn-cancel:hover { background: #b91c1c; }
+
+        #download-section {
+            display: none;
+            text-align: center;
+            margin-bottom: 24px;
+        }
+        .zip-size {
+            color: #666;
+            font-size: 0.82em;
             margin-top: 6px;
         }
 
         /* Log */
         #log-container {
             display: none;
-            background: #1a1a1a;
-            border-radius: 12px;
-            padding: 24px;
-            border: 1px solid #2a2a2a;
-            margin-bottom: 20px;
+            background: #131313;
+            border-radius: 10px;
+            padding: 16px 20px;
+            border: 1px solid #1e1e1e;
         }
         #log-container h3 {
-            font-size: 0.9em;
-            color: #888;
-            margin-bottom: 12px;
+            font-size: 0.82em;
+            color: #555;
+            margin-bottom: 10px;
             cursor: pointer;
             user-select: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
+        #log-container h3 .arrow {
+            transition: transform 0.2s;
+            display: inline-block;
+        }
+        #log-container h3 .arrow.collapsed { transform: rotate(-90deg); }
         #log {
-            max-height: 300px;
+            max-height: 280px;
             overflow-y: auto;
-            font-family: 'Cascadia Code', 'Fira Code', monospace;
-            font-size: 0.8em;
-            line-height: 1.6;
+            font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', monospace;
+            font-size: 0.78em;
+            line-height: 1.7;
         }
-        #log::-webkit-scrollbar { width: 6px; }
+        #log::-webkit-scrollbar { width: 5px; }
         #log::-webkit-scrollbar-track { background: transparent; }
-        #log::-webkit-scrollbar-thumb { background: #333; border-radius: 3px; }
-        .log-entry { padding: 2px 0; }
+        #log::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+        .log-entry { padding: 1px 0; }
         .log-success { color: #4ade80; }
         .log-error { color: #f87171; }
         .log-info { color: #60a5fa; }
         .log-warn { color: #fbbf24; }
-
-        /* Download section */
-        #download-section {
-            display: none;
-            text-align: center;
-            margin-top: 20px;
-        }
-        #download-section button {
-            background: #22c55e;
-            font-size: 1.1em;
-            padding: 16px 40px;
-            border-radius: 10px;
-        }
-        #download-section button:hover { background: #16a34a; }
-        .zip-size {
-            color: #888;
-            font-size: 0.85em;
-            margin-top: 8px;
-        }
-
-        /* Actions row */
-        .actions-row {
-            display: flex;
-            gap: 10px;
-            justify-content: center;
-            margin-top: 16px;
-        }
-        .btn-cancel {
-            background: #dc2626;
-        }
-        .btn-cancel:hover { background: #b91c1c; }
-
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>FotoShare Downloader</h1>
-        <p class="subtitle">Telechargez toutes les photos et videos d'un album FotoShare en ZIP</p>
 
-        <div class="input-section">
-            <h2>Entrer l'URL de l'album</h2>
-            <div class="input-row">
-                <input type="text" id="url-input" placeholder="https://fotoshare.co/a/1234567">
-                <button id="btn-fetch" onclick="fetchFromUrl()">Analyser</button>
+    <!-- ===== LANDING PAGE ===== -->
+    <div id="landing">
+        <div class="logo">
+            <div class="logo-text">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="" />
+                Fotoshare <span>Downloader</span>
             </div>
         </div>
 
-        <div id="status-panel">
-            <div class="album-title-display" id="album-title"></div>
+        <div class="search-bar">
+            <input type="text" id="url-input" placeholder="Collez l'URL d'un album Fotoshare..." autofocus>
+            <button id="btn-fetch" onclick="fetchFromUrl()">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </button>
+        </div>
+
+        <div class="landing-error" id="landing-error"></div>
+
+        <div class="landing-hint">
+            Appuyez sur <kbd>Entree</kbd> pour analyser
+        </div>
+    </div>
+
+    <!-- ===== RESULTS PAGE ===== -->
+    <div id="results">
+        <div class="top-bar">
+            <div class="mini-logo" onclick="goHome()">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAL4AAAEsCAMAAABKc/lTAAAAAXNSR0IB2cksfwAAAAlwSFlzAAALEwAACxMBAJqcGAAAAJZQTFRFtIow0qE4yJk1AAAARZedRpqhO4GI0aA49LtB6LE+T6+3UbO7RJadvZEy3Kk7SJ6lSaKpPYiOW4A8apVFZY1CdKNLh75XgLRTQI/LQZLQN3uuQZHOQpTTOH2xYYk/caBKa5hGQI7KN3qtejojjkQoh0Amwl0342s/12Y8mj+NnUCQhDZ6nUCQhDZ6v1s24Gk+1GQ7aTMeImXnPAAAADJ0Uk5T////AJL//////9P//+P/prBsSH1p///N//+9////X5mF/7s4bFn///+KklH//+n//w1IvD8aAAACl0lEQVR4nO3csUpcYRSFUS8W05hGCFjZCJa+/3PEUrBJK6SOWFhfZhs2xHN/BtbpfpBvr8ZimrtdbVcTt23/en7fymko/L57Tq3g5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6zg5zB+sYKfw/jFCn4O4xcr+DmMX6xcOv/HTPjvx+55M8W/HukedfgrD3/l4a88/JWHv/LwVx7+ysNfedvt0O+gPyPZs5mfQ/y33XNq5SD+HX5awc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBzGL9Ywc9h/GIFP4fxixX8HMYvVvBz+CD+/VD49+55//7F3/3fnS79MxP4Cw9/5eGvPPyVh7/y8Fce/srDX3nbw9CvrdeR7NnM4xD/ZSR7NnMMf2rlKP7Mvxj+F2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HMYv1jBz2H8YgU/h/GLFfwcxi9W8HP4IP7TEP959xzjXz+NhH/tn2NfCrjsr2R8AjlBKPETY48eAAAAAElFTkSuQmCC" alt="" />
+                Fotoshare <span>Downloader</span>
+            </div>
+            <div class="mini-search">
+                <input type="text" id="url-input-mini" placeholder="Autre URL...">
+                <button onclick="fetchFromMini()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </button>
+            </div>
+        </div>
+
+        <div class="results-content">
+            <div class="album-header">
+                <h2 id="album-title"></h2>
+                <div class="album-meta" id="album-meta"></div>
+            </div>
+
             <div class="stats">
                 <div class="stat-box">
                     <div class="number" id="stat-photos">0</div>
@@ -252,22 +415,22 @@
                     <div class="number" id="stat-total">0</div>
                     <div class="label">Total</div>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box success">
                     <div class="number" id="stat-downloaded">0</div>
-                    <div class="label">Telecharges</div>
+                    <div class="label">OK</div>
                 </div>
-                <div class="stat-box">
+                <div class="stat-box error">
                     <div class="number" id="stat-errors">0</div>
                     <div class="label">Erreurs</div>
                 </div>
             </div>
 
-            <div class="progress-container">
+            <div class="progress-section">
                 <div class="progress-bar-bg">
                     <div class="progress-bar-fill" id="progress-bar"></div>
                 </div>
                 <div class="progress-text">
-                    <span id="progress-label">En attente...</span>
+                    <span id="progress-label">Pret a telecharger</span>
                     <span id="progress-percent">0%</span>
                 </div>
             </div>
@@ -278,14 +441,14 @@
             </div>
 
             <div id="download-section">
-                <button onclick="saveZip()">Telecharger le ZIP</button>
+                <button class="btn-download-zip" onclick="saveZip()">Telecharger le ZIP</button>
                 <div class="zip-size" id="zip-size"></div>
             </div>
-        </div>
 
-        <div id="log-container">
-            <h3 onclick="toggleLog()">Journal des operations (cliquer pour reduire/agrandir)</h3>
-            <div id="log"></div>
+            <div id="log-container">
+                <h3 onclick="toggleLog()"><span class="arrow" id="log-arrow">&#9660;</span> Journal</h3>
+                <div id="log"></div>
+            </div>
         </div>
     </div>
 
@@ -305,25 +468,42 @@
         { name: 'AllOrigins',   build: (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}` },
         { name: 'corsproxy.io', build: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}` },
     ];
-    // Once a proxy works for a given purpose, remember it
     let workingProxyPage = null;
     let workingProxyMedia = null;
 
-    // Try fetching a URL through all proxies, return { response, proxy }
     async function fetchWithAutoProxy(url, knownProxy) {
-        // If we already found a working proxy, try it first
         const order = knownProxy
             ? [knownProxy, ...PROXIES.filter(p => p !== knownProxy)]
             : PROXIES;
-
         for (const proxy of order) {
             try {
                 const proxied = proxy.build(url);
                 const response = await fetch(proxied);
                 if (response.ok) return { response, proxy };
-            } catch (_) { /* try next */ }
+            } catch (_) {}
         }
         throw new Error('Tous les proxies ont echoue');
+    }
+
+    // Navigation
+    function goHome() {
+        if (downloading) return;
+        document.getElementById('results').classList.remove('show');
+        setTimeout(() => {
+            document.getElementById('results').style.display = 'none';
+            document.getElementById('landing').style.display = 'flex';
+            requestAnimationFrame(() => document.getElementById('landing').classList.remove('hide'));
+            document.getElementById('url-input').focus();
+        }, 300);
+    }
+
+    function showResults() {
+        document.getElementById('landing').classList.add('hide');
+        setTimeout(() => {
+            document.getElementById('landing').style.display = 'none';
+            document.getElementById('results').style.display = 'block';
+            requestAnimationFrame(() => document.getElementById('results').classList.add('show'));
+        }, 350);
     }
 
     // Logging
@@ -342,20 +522,18 @@
     function toggleLog() {
         logVisible = !logVisible;
         document.getElementById('log').style.display = logVisible ? 'block' : 'none';
+        document.getElementById('log-arrow').classList.toggle('collapsed', !logVisible);
     }
 
-    // Parse HTML to extract media items
+    // Parse HTML
     function parseHTML(html) {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
 
-        // Get title
         const titleEl = doc.querySelector('h1.album-title') || doc.querySelector('title');
-        albumTitle = titleEl ? titleEl.textContent.trim() : 'FotoShare_Album';
-        // Sanitize folder name
+        albumTitle = titleEl ? titleEl.textContent.trim() : 'Fotoshare_Album';
         albumTitle = albumTitle.replace(/[<>:"\/\\|?*]/g, '_').trim();
 
-        // Get all thumb divs
         const thumbs = doc.querySelectorAll('div.thumb[data-thumb]');
         mediaItems = [];
 
@@ -364,84 +542,97 @@
             const thumbUrl = thumb.getAttribute('data-thumb').replace(/&amp;/g, '&');
             const hash = thumb.getAttribute('data-hash') || `item_${index}`;
 
-            let fullUrl;
-            let filename;
-
+            let fullUrl, filename;
             if (type === 'mp4') {
-                // Video: thumb is like .../filename_thumb.jpg?..., video is .../filename.mp4
-                const urlBase = thumbUrl.split('?')[0]; // remove query params
+                const urlBase = thumbUrl.split('?')[0];
                 fullUrl = urlBase.replace(/_thumb\.jpg$/, '.mp4');
                 filename = fullUrl.split('/').pop();
             } else {
-                // Photo: thumb is like .../filename.jpg?width=450&..., full size = no query params
                 fullUrl = thumbUrl.split('?')[0];
                 filename = fullUrl.split('/').pop();
             }
 
-            mediaItems.push({
-                index: index + 1,
-                type,
-                hash,
-                thumbUrl,
-                fullUrl,
-                filename,
-                status: 'pending'
-            });
+            mediaItems.push({ index: index + 1, type, hash, thumbUrl, fullUrl, filename, status: 'pending' });
         });
 
         return mediaItems.length > 0;
     }
 
-    // Display parsed results
     function showParsedResults() {
         const photos = mediaItems.filter(m => m.type !== 'mp4').length;
         const videos = mediaItems.filter(m => m.type === 'mp4').length;
 
         document.getElementById('album-title').textContent = albumTitle;
+        document.getElementById('album-meta').textContent = `${photos} photos, ${videos} videos`;
         document.getElementById('stat-photos').textContent = photos;
         document.getElementById('stat-videos').textContent = videos;
         document.getElementById('stat-total').textContent = mediaItems.length;
         document.getElementById('stat-downloaded').textContent = '0';
         document.getElementById('stat-errors').textContent = '0';
-        document.getElementById('status-panel').style.display = 'block';
         document.getElementById('btn-start').style.display = 'inline-block';
         document.getElementById('btn-start').disabled = false;
         document.getElementById('download-section').style.display = 'none';
         document.getElementById('progress-label').textContent = 'Pret a telecharger';
         document.getElementById('progress-percent').textContent = '0%';
         document.getElementById('progress-bar').style.width = '0%';
+        document.getElementById('progress-bar').style.background = 'linear-gradient(90deg, #4a9eff, #7b61ff)';
+
+        // Clear old logs
+        document.getElementById('log').innerHTML = '';
+        document.getElementById('log-container').style.display = 'none';
 
         log(`Album: "${albumTitle}"`, 'info');
-        log(`${photos} photos et ${videos} videos detectees (${mediaItems.length} fichiers au total)`, 'success');
+        log(`${photos} photos et ${videos} videos detectees`, 'success');
+
+        showResults();
     }
 
-    // Fetch from URL
+    // Fetch from landing
     async function fetchFromUrl() {
         const url = document.getElementById('url-input').value.trim();
         if (!url) return;
+        await doFetch(url, 'landing');
+    }
 
+    // Fetch from mini bar
+    function fetchFromMini() {
+        const url = document.getElementById('url-input-mini').value.trim();
+        if (!url) return;
+        doFetch(url, 'mini');
+    }
+
+    async function doFetch(url, source) {
+        const errorEl = document.getElementById('landing-error');
         const btn = document.getElementById('btn-fetch');
-        btn.disabled = true;
-        btn.textContent = 'Chargement...';
-        log(`Recuperation de la page: ${url}`, 'info');
+
+        if (source === 'landing') {
+            errorEl.textContent = '';
+            btn.innerHTML = '<div class="spinner"></div>';
+            btn.disabled = true;
+        }
 
         try {
             const { response, proxy } = await fetchWithAutoProxy(url, workingProxyPage);
             workingProxyPage = proxy;
-            log(`Page recuperee via ${proxy.name}`, 'info');
             const html = await response.text();
 
             if (parseHTML(html)) {
+                document.getElementById('url-input-mini').value = url;
                 showParsedResults();
             } else {
-                log('Aucun media trouve dans la page. Verifiez l\'URL.', 'error');
+                const msg = 'Aucun media trouve. Verifiez l\'URL.';
+                if (source === 'landing') errorEl.textContent = msg;
+                else log(msg, 'error');
             }
         } catch (err) {
-            log(`Erreur: ${err.message}`, 'error');
-            log('Chargez le fichier HTML manuellement via l\'option 2.', 'warn');
+            const msg = `Impossible de recuperer la page: ${err.message}`;
+            if (source === 'landing') errorEl.textContent = msg;
+            else log(msg, 'error');
         } finally {
-            btn.disabled = false;
-            btn.textContent = 'Analyser';
+            if (source === 'landing') {
+                btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+                btn.disabled = false;
+            }
         }
     }
 
@@ -451,20 +642,16 @@
                 if (cancelled) return null;
                 const { response, proxy } = await fetchWithAutoProxy(item.fullUrl, workingProxyMedia);
                 workingProxyMedia = proxy;
-                const blob = await response.blob();
-                return blob;
+                return await response.blob();
             } catch (err) {
                 if (attempt < retries) {
                     log(`Retry ${attempt + 1}/${retries} pour ${item.filename}: ${err.message}`, 'warn');
                     await new Promise(r => setTimeout(r, 1000 * (attempt + 1)));
-                } else {
-                    throw err;
-                }
+                } else throw err;
             }
         }
     }
 
-    // Update progress
     function updateProgress() {
         const total = mediaItems.length;
         const done = downloadedCount + errorCount;
@@ -477,7 +664,6 @@
             `${done}/${total} traites (${downloadedCount} OK, ${errorCount} erreurs)`;
     }
 
-    // Start download
     async function startDownload() {
         if (downloading) return;
         downloading = true;
@@ -493,17 +679,13 @@
 
         const zip = new JSZip();
         const folder = zip.folder(albumTitle);
-
         const CONCURRENT = 4;
         let queue = [...mediaItems];
         let active = 0;
 
         await new Promise((resolve) => {
             function processNext() {
-                if (cancelled) {
-                    if (active === 0) resolve();
-                    return;
-                }
+                if (cancelled) { if (active === 0) resolve(); return; }
                 while (active < CONCURRENT && queue.length > 0) {
                     const item = queue.shift();
                     active++;
@@ -521,11 +703,8 @@
                         } finally {
                             active--;
                             updateProgress();
-                            if (queue.length > 0) {
-                                processNext();
-                            } else if (active === 0) {
-                                resolve();
-                            }
+                            if (queue.length > 0) processNext();
+                            else if (active === 0) resolve();
                         }
                     })();
                 }
@@ -534,36 +713,34 @@
         });
 
         if (cancelled) {
-            log('Telechargement annule par l\'utilisateur.', 'warn');
+            log('Telechargement annule.', 'warn');
             downloading = false;
             document.getElementById('btn-start').disabled = false;
             document.getElementById('btn-cancel').style.display = 'none';
             return;
         }
 
-        log('Creation du fichier ZIP en cours...', 'info');
+        log('Creation du ZIP...', 'info');
         document.getElementById('progress-label').textContent = 'Generation du ZIP...';
 
         try {
             zipBlob = await zip.generateAsync(
                 { type: 'blob', compression: 'STORE' },
                 (metadata) => {
-                    const pct = Math.round(metadata.percent);
                     document.getElementById('progress-label').textContent =
-                        `Generation du ZIP: ${pct}%`;
+                        `Generation du ZIP: ${Math.round(metadata.percent)}%`;
                 }
             );
-
             log(`ZIP cree: ${formatSize(zipBlob.size)}`, 'success');
             document.getElementById('zip-size').textContent =
-                `Taille: ${formatSize(zipBlob.size)} | ${downloadedCount} fichiers`;
+                `${formatSize(zipBlob.size)} - ${downloadedCount} fichiers`;
             document.getElementById('download-section').style.display = 'block';
             document.getElementById('progress-label').textContent = 'Termine !';
             document.getElementById('progress-bar').style.width = '100%';
             document.getElementById('progress-bar').style.background =
                 'linear-gradient(90deg, #22c55e, #4ade80)';
         } catch (err) {
-            log(`Erreur lors de la creation du ZIP: ${err.message}`, 'error');
+            log(`Erreur ZIP: ${err.message}`, 'error');
         }
 
         downloading = false;
@@ -579,7 +756,7 @@
     function saveZip() {
         if (zipBlob) {
             saveAs(zipBlob, `${albumTitle}.zip`);
-            log(`Telechargement du ZIP lance: ${albumTitle}.zip`, 'success');
+            log(`ZIP lance: ${albumTitle}.zip`, 'success');
         }
     }
 
@@ -590,9 +767,12 @@
         return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
     }
 
-    // Enter key on URL input
+    // Keyboard
     document.getElementById('url-input').addEventListener('keydown', (e) => {
         if (e.key === 'Enter') fetchFromUrl();
+    });
+    document.getElementById('url-input-mini').addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') fetchFromMini();
     });
     </script>
 </body>
