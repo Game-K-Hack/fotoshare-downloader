@@ -125,6 +125,8 @@
 
         /* ===== RESULTS PAGE ===== */
         #results {
+            height: 100vh;
+            max-height: 100vh;
             display: none;
             opacity: 0;
             transition: opacity 0.4s;
@@ -518,6 +520,7 @@
         logEl.appendChild(entry);
         logEl.scrollTop = logEl.scrollHeight;
         document.getElementById('log-container').style.display = 'block';
+        setHeightOfLogBox();
     }
 
     let logVisible = true;
@@ -758,6 +761,23 @@
         if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
         if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
         return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
+    }
+
+    function getHeight(elm) {
+        let style = window.getComputedStyle(elm);
+        let totalHeight = 0;
+        totalHeight += parseFloat(style.height);
+        // totalHeight += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+        totalHeight += parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
+        totalHeight += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+        return totalHeight;
+    }
+
+    function setHeightOfLogBox() {
+        const l = document.getElementById("log");
+        const h = getHeight(document.getElementById("results")) - getHeight(l);
+        console.log(h);
+        l.style.maxHeight = `calc(100vh - ${h}px)`;
     }
 
     // Keyboard
