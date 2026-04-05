@@ -222,23 +222,6 @@
         }
         .btn-cancel:hover { background: #b91c1c; }
 
-        /* Proxy selector */
-        .proxy-select {
-            margin-top: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.85em;
-            color: #888;
-        }
-        select {
-            padding: 6px 10px;
-            border-radius: 6px;
-            border: 1px solid #333;
-            background: #111;
-            color: #ccc;
-            font-size: 0.85em;
-        }
     </style>
 </head>
 <body>
@@ -247,18 +230,10 @@
         <p class="subtitle">Telechargez toutes les photos et videos d'un album FotoShare en ZIP</p>
 
         <div class="input-section">
-            <h2>Option 1 : Entrer l'URL de l'album</h2>
+            <h2>Entrer l'URL de l'album</h2>
             <div class="input-row">
                 <input type="text" id="url-input" placeholder="https://fotoshare.co/a/1234567">
                 <button id="btn-fetch" onclick="fetchFromUrl()">Analyser</button>
-            </div>
-            <div class="proxy-select">
-                <label>Proxy CORS :</label>
-                <select id="proxy-select">
-                    <option value="allorigins">AllOrigins</option>
-                    <option value="corsproxy">corsproxy.io</option>
-                    <option value="none">Aucun (meme domaine)</option>
-                </select>
             </div>
         </div>
 
@@ -324,18 +299,31 @@
     let downloadedCount = 0;
     let errorCount = 0;
 
-    // Proxy helpers
-    function getProxiedUrl(url) {
-        const proxy = document.getElementById('proxy-select').value;
-        switch (proxy) {
-            case 'allorigins':
-                return `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`;
-            case 'corsproxy':
-                return `https://corsproxy.io/?${encodeURIComponent(url)}`;
-            case 'none':
-            default:
-                return url;
+    // Proxy list - tried in order until one works
+    const PROXIES = [
+        { name: 'direct',      build: (url) => url },
+        { name: 'AllOrigins',   build: (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}` },
+        { name: 'corsproxy.io', build: (url) => `https://corsproxy.io/?${encodeURIComponent(url)}` },
+    ];
+    // Once a proxy works for a given purpose, remember it
+    let workingProxyPage = null;
+    let workingProxyMedia = null;
+
+    // Try fetching a URL through all proxies, return { response, proxy }
+    async function fetchWithAutoProxy(url, knownProxy) {
+        // If we already found a working proxy, try it first
+        const order = knownProxy
+            ? [knownProxy, ...PROXIES.filter(p => p !== knownProxy)]
+            : PROXIES;
+
+        for (const proxy of order) {
+            try {
+                const proxied = proxy.build(url);
+                const response = await fetch(proxied);
+                if (response.ok) return { response, proxy };
+            } catch (_) { /* try next */ }
         }
+        throw new Error('Tous les proxies ont echoue');
     }
 
     // Logging
@@ -438,9 +426,9 @@
         log(`Recuperation de la page: ${url}`, 'info');
 
         try {
-            const proxiedUrl = getProxiedUrl(url);
-            const response = await fetch(proxiedUrl);
-            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const { response, proxy } = await fetchWithAutoProxy(url, workingProxyPage);
+            workingProxyPage = proxy;
+            log(`Page recuperee via ${proxy.name}`, 'info');
             const html = await response.text();
 
             if (parseHTML(html)) {
@@ -449,8 +437,8 @@
                 log('Aucun media trouve dans la page. Verifiez l\'URL.', 'error');
             }
         } catch (err) {
-            log(`Erreur lors de la recuperation: ${err.message}`, 'error');
-            log('Essayez un autre proxy CORS ou chargez le fichier HTML manuellement.', 'warn');
+            log(`Erreur: ${err.message}`, 'error');
+            log('Chargez le fichier HTML manuellement via l\'option 2.', 'warn');
         } finally {
             btn.disabled = false;
             btn.textContent = 'Analyser';
@@ -458,12 +446,11 @@
     }
 
     async function downloadFile(item, retries = 2) {
-        const proxiedUrl = getProxiedUrl(item.fullUrl);
         for (let attempt = 0; attempt <= retries; attempt++) {
             try {
                 if (cancelled) return null;
-                const response = await fetch(proxiedUrl);
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const { response, proxy } = await fetchWithAutoProxy(item.fullUrl, workingProxyMedia);
+                workingProxyMedia = proxy;
                 const blob = await response.blob();
                 return blob;
             } catch (err) {
