@@ -462,6 +462,8 @@
     let downloadedCount = 0;
     let errorCount = 0;
 
+    const ARROW_SVG = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+
     // Proxy list - tried in order until one works
     const PROXIES = [
         { name: 'direct',      build: (url) => url },
@@ -537,22 +539,13 @@
         const thumbs = doc.querySelectorAll('div.thumb[data-thumb]');
         mediaItems = [];
 
-        thumbs.forEach((thumb, index) => {
+        thumbs.forEach((thumb) => {
             const type = thumb.getAttribute('data-type') || thumb.getAttribute('data-fileType') || 'jpg';
             const thumbUrl = thumb.getAttribute('data-thumb').replace(/&amp;/g, '&');
-            const hash = thumb.getAttribute('data-hash') || `item_${index}`;
+            const urlBase = thumbUrl.split('?')[0];
+            const fullUrl = type === 'mp4' ? urlBase.replace(/_thumb\.jpg$/, '.mp4') : urlBase;
 
-            let fullUrl, filename;
-            if (type === 'mp4') {
-                const urlBase = thumbUrl.split('?')[0];
-                fullUrl = urlBase.replace(/_thumb\.jpg$/, '.mp4');
-                filename = fullUrl.split('/').pop();
-            } else {
-                fullUrl = thumbUrl.split('?')[0];
-                filename = fullUrl.split('/').pop();
-            }
-
-            mediaItems.push({ index: index + 1, type, hash, thumbUrl, fullUrl, filename, status: 'pending' });
+            mediaItems.push({ type, fullUrl, filename: fullUrl.split('/').pop() });
         });
 
         return mediaItems.length > 0;
@@ -630,7 +623,7 @@
             else log(msg, 'error');
         } finally {
             if (source === 'landing') {
-                btn.innerHTML = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>';
+                btn.innerHTML = ARROW_SVG;
                 btn.disabled = false;
             }
         }
