@@ -342,7 +342,7 @@
         }
         #log-container h3 .arrow.collapsed { transform: rotate(-90deg); }
         #log {
-            max-height: 280px;
+            max-height: calc(100vh - 630px);
             overflow-y: auto;
             font-family: 'Cascadia Code', 'Fira Code', 'SF Mono', monospace;
             font-size: 0.78em;
@@ -520,7 +520,6 @@
         logEl.appendChild(entry);
         logEl.scrollTop = logEl.scrollHeight;
         document.getElementById('log-container').style.display = 'block';
-        setHeightOfLogBox();
     }
 
     let logVisible = true;
@@ -568,6 +567,7 @@
         document.getElementById('btn-start').style.display = 'inline-block';
         document.getElementById('btn-start').disabled = false;
         document.getElementById('download-section').style.display = 'none';
+        document.getElementById('log').style.maxHeight = "calc(100vh - 530px)";
         document.getElementById('progress-label').textContent = 'Pret a telecharger';
         document.getElementById('progress-percent').textContent = '0%';
         document.getElementById('progress-bar').style.width = '0%';
@@ -670,6 +670,7 @@
         document.getElementById('btn-start').disabled = true;
         document.getElementById('btn-cancel').style.display = 'inline-block';
         document.getElementById('download-section').style.display = 'none';
+        document.getElementById('log').style.maxHeight = "calc(100vh - 530px)";
 
         log('Debut du telechargement...', 'info');
 
@@ -731,6 +732,7 @@
             document.getElementById('zip-size').textContent =
                 `${formatSize(zipBlob.size)} - ${downloadedCount} fichiers`;
             document.getElementById('download-section').style.display = 'block';
+            document.getElementById('log').style.maxHeight = "calc(100vh - 630px)";
             document.getElementById('progress-label').textContent = 'Termine !';
             document.getElementById('progress-bar').style.width = '100%';
             document.getElementById('progress-bar').style.background =
@@ -761,23 +763,6 @@
         if (bytes < 1024 * 1024) return (bytes / 1024).toFixed(1) + ' KB';
         if (bytes < 1024 * 1024 * 1024) return (bytes / (1024 * 1024)).toFixed(1) + ' MB';
         return (bytes / (1024 * 1024 * 1024)).toFixed(2) + ' GB';
-    }
-
-    function getHeight(elm) {
-        let style = window.getComputedStyle(elm);
-        let totalHeight = 0;
-        totalHeight += parseFloat(style.height);
-        // totalHeight += parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
-        totalHeight += parseFloat(style.borderTopWidth) + parseFloat(style.borderBottomWidth);
-        totalHeight += parseFloat(style.marginTop) + parseFloat(style.marginBottom);
-        return totalHeight;
-    }
-
-    function setHeightOfLogBox() {
-        const l = document.getElementById("log");
-        const h = getHeight(document.getElementById("results")) - getHeight(l);
-        console.log(h);
-        l.style.maxHeight = `calc(100vh - ${h}px)`;
     }
 
     // Keyboard
