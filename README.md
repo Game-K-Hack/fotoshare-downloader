@@ -9,5 +9,5 @@ An online version is available: https://fotoshare-downloader.kmaindron.fr
 ![screenshot](./assets/screenshot2.png)
 *Paste the URL of your album*
 
-![screenshot](./assets/screenshot2.png)
+![screenshot](./assets/screenshot3.png)
 *And download the ZIP file*
